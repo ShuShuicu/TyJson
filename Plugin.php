@@ -1,10 +1,10 @@
 <?php
 /**
  * Typecho REST API 插件
- * 移植自 <a href="https://github.com/ShuShuicu/TTDF">TTDF</a> 框架的 RESTAPI 功能
+ * 移植自 <a href="https://github.com/ShuShuicu/TTDF">TTDF<a> 框架的 RESTAPI 功能
  * 
  * @package TyJson
- * @author 鼠子(Tomoriゞ)
+ * @author 鼠子
  * @version 1.0.0
  * @link http://blog.miomoe.cn/
  */
@@ -16,9 +16,6 @@ class TyJson_Plugin implements Typecho_Plugin_Interface
      */
     public static function activate()
     {
-        Helper::addRoute('tyjson_main', '/ty-json', 'TyJson_Action', 'action');
-        Helper::addRoute('tyjson_main_slash', '/ty-json/', 'TyJson_Action', 'action');
-    
         Helper::addRoute('tyjson_api', '/ty-json/[action]', 'TyJson_Action', 'dispatch');
         Helper::addRoute('tyjson_api_slash', '/ty-json/[action]/', 'TyJson_Action', 'dispatch');
     
