@@ -4,6 +4,7 @@
  * TyJson API 处理类
  */
 
+if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 require_once __DIR__ . '/DB.php';
 
 class TyJson_Action extends Typecho_Widget
