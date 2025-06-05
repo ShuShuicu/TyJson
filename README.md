@@ -52,7 +52,7 @@
 普通字段查询文章
 
 ```bash
-GET /ty-json/fields/{name}/{value}
+GET /ty-json/fields/post/{name}/{value}
 ```
 
 #### 高级查询
