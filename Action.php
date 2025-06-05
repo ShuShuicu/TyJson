@@ -4,7 +4,6 @@
  * TyJson API 处理类
  */
 
-if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 require_once __DIR__ . '/DB.php';
 
 class TyJson_Action extends Typecho_Widget
@@ -34,14 +33,6 @@ class TyJson_Action extends Typecho_Widget
     }
 
     /**
-     * 主入口方法
-     */
-    public function action()
-    {
-        $this->dispatch();
-    }
-
-    /**
      * 路由分发入口
      */
     public function dispatch()
@@ -49,20 +40,12 @@ class TyJson_Action extends Typecho_Widget
         try {
             $this->init();
 
-            // 获取请求参数
-            $request = $this->request;
-            $action = $request->get('action');
-            $params = $request->get('params');
-
-            // 处理路径参数
-            $pathParts = [];
-            if (!empty($params)) {
-                $pathParts = explode('/', $params);
-            }
+            $path = $this->getRequestPath();
+            $pathParts = explode('/', trim($path, '/'));
 
             // 路由分发
-            switch ($action) {
-                case '':
+            switch ($pathParts[0]) {
+                case 'site':
                     $response = $this->handleIndex();
                     break;
                 case 'posts':
@@ -139,17 +122,17 @@ class TyJson_Action extends Typecho_Widget
     {
         $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $basePath = '/ty-json/';
-
+        
         // 确保正确处理带查询参数的URL
         if (strpos($requestUri, '?') !== false) {
             $requestUri = strstr($requestUri, '?', true);
         }
-
+        
         if (strpos($requestUri, $basePath) === 0) {
             $path = substr($requestUri, strlen($basePath));
             return $path === false ? '/' : $path;
         }
-
+        
         return '/';
     }
 
@@ -445,7 +428,7 @@ class TyJson_Action extends Typecho_Widget
      */
     private function handleOptions($pathParts)
     {
-        if (count($pathParts) === 0 || $pathParts[0] === '') {
+        if (count($pathParts) === 1) {
             // 获取所有公开选项
             return [
                 'data' => $this->getAllPublicOptions(),
@@ -456,7 +439,7 @@ class TyJson_Action extends Typecho_Widget
         }
 
         // 获取特定选项
-        $optionName = $pathParts[0];
+        $optionName = $pathParts[1];
         $optionValue = Helper::options()->{$optionName};
 
         if ($optionValue === null) {
