@@ -1,7 +1,7 @@
 <?php
 /**
  * Typecho REST API 插件
- * 移植自 <a href="https://github.com/ShuShuicu/TTDF">TTDF<a> 框架的 RESTAPI 功能
+ * 移植自 <a href="https://github.com/ShuShuicu/TTDF">TTDF</a> 框架的 RESTAPI 功能
  * 
  * @package TyJson
  * @author 鼠子
