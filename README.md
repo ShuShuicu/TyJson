@@ -1,5 +1,5 @@
 # TyJson
-这是TTDF框架RESTty-json的独立版插件，用于输出站点 `Json` 数据
+这是TTDF框架RESTAPI的独立版插件，用于输出站点 `Json` 数据
 
 ## 功能特性
 
